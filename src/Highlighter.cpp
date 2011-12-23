@@ -34,7 +34,7 @@ Highlighter::Highlighter(QTextDocument *parent)
 
     rulesFormat.setForeground(QColor(0, 0, 150));
     rulesFormat.setFontWeight(QFont::Bold);
-    rule.pattern = QRegExp("^(\\s|\\s\\s|\\s\\s\\s)\s(-|--|---)\\s.*$");
+    rule.pattern = QRegExp("^(\\s|\\s\\s|\\s\\s\\s)\\s(-|--|---)\\s.*$");
     rule.format = rulesFormat;
     highlightingRules.append(rule);
 

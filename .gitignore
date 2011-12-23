@@ -1,0 +1,10 @@
+*nomade*
+*.o
+*.a
+*.so
+moc_*
+.gitignore
+*Makefile*
+src/.obj/*
+*.rcc
+qrc_*
