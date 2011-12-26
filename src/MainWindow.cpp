@@ -85,7 +85,7 @@ bool MainWindow::saveAs()
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("About Anomade"),
-            tr("Another Markdown Editor 1.0\n Eduardo Nunes Pereira (eduardonunesp@gmail.com)"));
+            tr("Anomade (Another Markdown Editor 1.0)\nEduardo Nunes Pereira (eduardonunesp@gmail.com)"));
 }
 
 void MainWindow::documentWasModified()
@@ -97,6 +97,8 @@ void MainWindow::init()
 {
     setAttribute(Qt::WA_DeleteOnClose);
     isUntitled = true;
+
+    resize(800, 600);
 
     editArea = new QTextEdit(this);
     editArea->setAcceptRichText(true);
@@ -110,16 +112,15 @@ void MainWindow::init()
     previewArea->setMinimumWidth(400);
 
     splitter = new QSplitter(Qt::Horizontal, this);
-    splitter->setOpaqueResize(false);
-    splitter->setChildrenCollapsible(false);
     splitter->addWidget(editArea);
     splitter->addWidget(previewArea);
-    splitter->setHandleWidth(1);
+    splitter->setHandleWidth(2);
 
     QList<int> sizes;
     sizes << 50 << 50;
     splitter->setSizes(sizes);
-    splitter->setStyleSheet("border: 0px;");
+    splitter->setStyleSheet("border: 1px;");
+    splitter->setChildrenCollapsible(false);
     
     setCentralWidget(splitter);
     setUnifiedTitleAndToolBarOnMac(true);
@@ -131,6 +132,7 @@ void MainWindow::init()
 
     createActions();
     createMenus();
+    readSettings();
 }
 
 void MainWindow::createMenus()
