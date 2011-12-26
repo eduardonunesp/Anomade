@@ -26,7 +26,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::resizeEvent (QResizeEvent *event) 
 {
-    //previewArea->setFixedWidth(editArea->width());
+    previewArea->setFixedWidth(editArea->width());
 }
 
 void MainWindow::newFile() 
@@ -102,17 +102,24 @@ void MainWindow::init()
     editArea->setAcceptRichText(true);
     editArea->setLineWrapMode(QTextEdit::NoWrap);
     editArea->setFont(QFont("Monoespace",12));
-    editArea->setFixedWidth(400);
+    editArea->setMinimumWidth(400);
     
     previewArea = new QWebView(this);
     previewArea->setFixedWidth(editArea->width());
     previewArea->settings()->setUserStyleSheetUrl(QUrl::fromLocalFile(":resources/my.css"));
-    previewArea->setFixedWidth(400);
+    previewArea->setMinimumWidth(400);
 
-    splitter = new QSplitter(Qt::Horizontal);
+    splitter = new QSplitter(Qt::Horizontal, this);
+    splitter->setOpaqueResize(false);
     splitter->setChildrenCollapsible(false);
     splitter->addWidget(editArea);
     splitter->addWidget(previewArea);
+    splitter->setHandleWidth(1);
+
+    QList<int> sizes;
+    sizes << 50 << 50;
+    splitter->setSizes(sizes);
+    splitter->setStyleSheet("border: 0px;");
     
     setCentralWidget(splitter);
     setUnifiedTitleAndToolBarOnMac(true);
